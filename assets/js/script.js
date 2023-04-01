@@ -55,9 +55,12 @@ function displayTodayWeather(city, searchTerm) {
     //PROBLEM: city name not showing up on page 
     citySearchTerm.textContent = searchTerm + " " + dayjs().format("M/D/YYYY")
 
-    tempToday.textContent = "Temp: " + city.main.temp
-    windToday.textContent = "Wind: " + city.wind.speed
-    humidityToday.textContent = "Humidity: " + city.main.humidity
+    tempKelvin = city.main.temp
+    tempImperial = ((tempKelvin-273.15)*1.8)+32
+
+    tempToday.textContent = "Temp: " + tempImperial + "°F"
+    windToday.textContent = "Wind: " + city.wind.speed + " MPH"
+    humidityToday.textContent = "Humidity: " + city.main.humidity + "%"
 
 }
 
