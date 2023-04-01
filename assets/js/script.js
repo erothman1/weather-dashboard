@@ -24,6 +24,24 @@ function formSubmitHandler(event) {
 }
 
 function getCityWeather(city) {
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey
+
+    fetch(queryURL)
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    displayWeather(data, city)
+                })
+            } else {
+                alert("Error " + response.statusText)
+            }
+        })
+        .catch(function(error) {
+            alert("Unable to connect to Weather API")
+        })
+}
+
+function displayWeather(city, searchTerm) {
     
 }
 
