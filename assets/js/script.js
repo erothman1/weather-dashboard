@@ -51,15 +51,18 @@ function getTodayCityWeather(city) {
 //Function to display today's weather on page
 function displayTodayWeather(city, searchTerm) {
 
-    console.log(searchTerm)
+    console.log(searchTerm + " " + dayjs().format("M/D/YYYY"))
     //PROBLEM: city name not showing up on page 
     citySearchTerm.textContent = searchTerm + " " + dayjs().format("M/D/YYYY")
 
     tempKelvin = city.main.temp
-    tempImperial = ((tempKelvin-273.15)*1.8)+32
+    tempImperial = (((tempKelvin-273.15)*1.8)+32).toFixed(2)
+
+    windMeterperSec = city.wind.speed
+    windImperial = (windMeterperSec*2.237).toFixed(2)
 
     tempToday.textContent = "Temp: " + tempImperial + "°F"
-    windToday.textContent = "Wind: " + city.wind.speed + " MPH"
+    windToday.textContent = "Wind: " + windImperial + " MPH"
     humidityToday.textContent = "Humidity: " + city.main.humidity + "%"
 
 }
