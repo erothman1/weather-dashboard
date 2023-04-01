@@ -6,6 +6,10 @@ var APIKey = "ade2c4f2764feb097e5627010f95859c"
 
 var userFormEl = document.getElementById("user-form")
 var inputEl = document.getElementById("city-name")
+var citySearchTerm = document.getElementById("city-name")
+var tempToday = document.getElementById("temp-today")
+var windToday = document.getElementById("wind-today")
+var humidityToday = document.getElementById("humidity-today")
 
 //Function handles form submission
 function formSubmitHandler(event) {
@@ -15,7 +19,7 @@ function formSubmitHandler(event) {
 
     if (cityName) {
         getTodayCityWeather(cityName)
-        getForecastCityWeather(cityName)
+        // getForecastCityWeather(cityName)
         //create button elements for city search history
         inputEl.value = ""
     } else {
@@ -33,6 +37,7 @@ function getTodayCityWeather(city) {
                 response.json().then(function(data) {
                     displayTodayWeather(data, city)
                     console.log(response)
+                    console.log(data)
                 })
             } else {
                 alert("Error " + response.statusText)
@@ -45,6 +50,15 @@ function getTodayCityWeather(city) {
 
 //Function to display today's weather on page
 function displayTodayWeather(city, searchTerm) {
+
+    console.log(searchTerm)
+    //PROBLEM: city name not showing up on page 
+    citySearchTerm.textContent = searchTerm
+
+    tempToday.textContent = "Temp: " + city.main.temp
+    windToday.textContent = "Wind: " + city.wind.speed
+    humidityToday.textContent = "Humidity: " + city.main.humidity
+
 
 }
 
