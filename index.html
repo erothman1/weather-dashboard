@@ -20,21 +20,20 @@
         <h1>Weather Dashboard</h1>
     </header>
 
-    <div class="row">
+    <div class="row d-flex">
 
         <div class="card col-md-4 p-3">
             <div class="card-body">
-                <h3 class="card-header text-bold">Search By City</h3>
+                <h3 class="card-header fw-bold">Search By City</h3>
                 <form id="user-form" class="card-body">
-                  <label class="form-label" for="city-name">City</label>
-                  <input name="city-name" id="city-name" type="text" autofocus="true" class="form-input" />
+                  <input name="city-name" id="city-name" type="text" autofocus="true" class="form-input" placeholder="City" />
                   <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
           </div>
 
           <div class="card col-md-8 p-3">
-            <div class="card-header">
+            <div class="card-header fs-3 fw-bold">
               City Name
             </div>
             <ul class="list-group list-group-flush">
