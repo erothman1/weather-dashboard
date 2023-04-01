@@ -22,6 +22,7 @@
 
     <div class="row d-flex">
 
+        <!-- Search by city form -->
         <div class="card col-md-4 p-3">
             <div class="card-body">
                 <h3 class="card-header fw-bold">Search By City</h3>
@@ -32,6 +33,7 @@
             </div>
           </div>
 
+          <!-- Today's forecast -->
           <div class="card col-md-8 p-3">
             <div class="card-header fs-3 fw-bold">
               City Name
@@ -44,6 +46,72 @@
           </div>
 
     </div>
+
+    <div class="row">
+
+        <!-- Search history buttons go here -->
+        <div class="col-md-4">
+            <div id="search-history-container"></div>
+        </div>
+
+        <!-- 5 day forecast -->
+        <div class="card col-md-8 p-3">
+            <div id="forecast">
+                <h3 class="card-header fs-3 fw-bold">5 Day Forecast:</h3>
+                <div id="forecast-container">
+
+                    <div class="row p-3">
+                        <!-- Day one forecast -->
+                        <div id="day-one" class="card col-md-2 m-1">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+    
+                        <!-- Day two forecast -->
+                        <div id="day-two" class="card col-md-2 m-1">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+    
+                        <!-- Day three forecast -->
+                        <div id="day-three" class="card col-md-2 m-1">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+    
+                        <!-- Day four forecast -->
+                        <div id="day-four" class="card col-md-2 m-1">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+    
+                        <!-- Day five forecast -->
+                        <div id="day-five" class="card col-md-2 m-1">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
     
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -54,3 +122,9 @@
     <script src = "./assets/js/script.js"></script>
 </body>
 </html>
+
+<div id="one" class="card"></div>
+<div id="two" class="card"></div>
+<div id="three" class="card"></div>
+<div id="four" class="card"></div>
+<div id="five" class="card"></div>
