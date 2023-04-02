@@ -31,7 +31,7 @@ function formSubmitHandler(event) {
     if (countryCode.includes(countryName)) {
         if (cityName && countryName) {
             getTodayCityWeather(cityName, countryName)
-            getForecastCityWeather(cityName, countryName)
+            getLonLat(cityName, countryName)
             inputEl.value = ""
         } else {
             alert("Please enter a valid city name and country code")
@@ -59,8 +59,8 @@ function getTodayCityWeather(city, country) {
             if (response.ok) {
                 response.json().then(function(data) {
                     displayTodayWeather(data, city, country)
-                    console.log(response)
-                    console.log(data)
+                    // console.log(response)
+                    // console.log(data)
                 })
             } else {
                 alert("Error " + response.statusText)
@@ -92,10 +92,36 @@ function displayTodayWeather(city, searchTermCity, searchTermCountry) {
  
 }
 
+function getLonLat(city, country) {
+    var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + country + "&appid=" + APIKey
+
+    fetch(queryURL)
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    // getForecastCityWeather(data)
+                    console.log(data)
+                })
+            } else {
+                alert("Error" + response.statusText)
+                console.log(response)
+            }
+        })
+        .catch(function(error) {
+            alert("Unable to connect to Weather API")
+        })
+}
+
 //Function handles fetching five-day forecast weather data 
 //TODO: need different api url for 5-day weather forecast
 //TODO: need to convert city name to longitude and latitude with geocoding api
-function getForecastCityWeather(city) {
+function getForecastCityWeather(data) {
+    var latitude = data.lat 
+    var longitude = data.lon 
+
+    var queryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey
+
+    
 
 }
 
