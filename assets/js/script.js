@@ -15,16 +15,42 @@ var humidityToday = document.getElementById("humidity-today")
 function formSubmitHandler(event) {
     event.preventDefault()
 
-    var cityName = inputEl.value.trim()
+    var userInputArr = []
+    userInputArr.push(inputEl.value.split(","))
+    
+    var cityName = userInputArr[0][0]
+    // var stateName = userInputArr[0][1]
+    var countryName = userInputArr[0][2]
 
-    if (cityName) {
-        getTodayCityWeather(cityName)
-        // getForecastCityWeather(cityName)
-        //create button elements for city search history
+    console.log(userInputArr)
+
+    console.log(cityName)
+    // console.log(stateName)
+    console.log(countryName)
+
+    // if (cityName || cityName&&stateName || cityName&&countryName || cityName&&stateName&&countryName) {
+    //     console.log('hello')
+    // }
+
+    if (cityName && countryName) {
+        getTodayCityWeather(cityName, countryName)
+        getForecastCityWeather(cityName, countryName)
         inputEl.value = ""
     } else {
-        alert("Please enter a city name")
+        alert("Please enter a valid city name and country code")
     }
+
+
+    // var cityName = inputEl.value.trim()
+
+    // if (cityName) {
+    //     getTodayCityWeather(cityName)
+    //     // getForecastCityWeather(cityName)
+    //     //create button elements for city search history
+    //     inputEl.value = ""
+    // } else {
+    //     alert("Please enter a city name")
+    // }
 }
 
 //Function handles fetching weather data for today's weather
@@ -49,10 +75,11 @@ function getTodayCityWeather(city) {
 }
 
 //Function to display today's weather on page
+//TODO: problem:: city name and date not showing up on page but is showing in console
+//TODO: need to add icon representation of weather conditions
 function displayTodayWeather(city, searchTerm) {
 
     console.log(searchTerm + " " + dayjs().format("M/D/YYYY"))
-    //PROBLEM: city name not showing up on page 
     citySearchTerm.textContent = searchTerm + " " + dayjs().format("M/D/YYYY")
 
     tempKelvin = city.main.temp
@@ -65,12 +92,14 @@ function displayTodayWeather(city, searchTerm) {
     windToday.textContent = "Wind: " + windImperial + " MPH"
     humidityToday.textContent = "Humidity: " + city.main.humidity + "%"
 
+ 
 }
 
 //Function handles fetching five-day forecast weather data 
+//TODO: need different api url for 5-day weather forecast
+//TODO: need to convert city name to longitude and latitude with geocoding api
 function getForecastCityWeather(city) {
-    //need different api url for 5-day weather forecast
-    //need to convert city name to longitude and latitude 
+
 }
 
 //Function to display 5-day forecast on page 
@@ -83,5 +112,5 @@ function displayForecastWeather() {
 
 
 //Click events
-//need click event for buttons for each search history 
+//TODO: need click event for buttons for each search history 
 userFormEl.addEventListener("submit", formSubmitHandler)
