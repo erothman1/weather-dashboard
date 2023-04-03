@@ -112,7 +112,7 @@ searchStorage()
 
 //Function handles fetching weather data for today's weather
 function getTodayCityWeather(city, country) {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country + "&appid=" + APIKey
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country + "&appid=" + APIKey
 
     fetch(queryURL)
         .then(function(response) {
@@ -157,7 +157,7 @@ function displayTodayWeather(city, searchTermCity, searchTermCountry) {
 
 //Function handles getting latitude and longitude of city
 function getLonLat(city, country) {
-    var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + country + "&appid=" + APIKey
+    var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + country + "&appid=" + APIKey
 
     fetch(queryURL)
         .then(function(response) {
@@ -180,7 +180,7 @@ function getForecastCityWeather(city) {
     var latitude = city[0].lat 
     var longitude = city[0].lon 
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial"
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial"
 
     fetch(queryURL)
         .then(function(response) {
