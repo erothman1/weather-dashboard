@@ -200,7 +200,6 @@ function getForecastCityWeather(city) {
 }
 
 //Function to display 5-day forecast on page 
-//TODO: get dates to show up for forecast and put icons for weather conditions
 function displayForecastWeather(data) {
 
     dateOne.textContent = data.list[3].dt_txt.split(" ")[0]
@@ -250,8 +249,5 @@ function displayForecastWeather(data) {
 }
 
 //Click events
-//TODO: need click event for buttons for each search history 
 userFormEl.addEventListener("submit", formSubmitHandler)
-
-//This click event isn't working 
 historyContainer.addEventListener("click", formSubmitHandler)
