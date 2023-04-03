@@ -78,7 +78,7 @@ function formSubmitHandler(event) {
 
             var savedCityBtn = document.createElement("button")
             savedCityBtn.textContent = cityName + ", " + countryName
-            savedCityBtn.setAttribute("class", "btn btn-primary")
+            savedCityBtn.setAttribute("class", "btn btn-secondary")
             historyBtns.appendChild(savedCityBtn)
 
         } else {
@@ -103,7 +103,7 @@ function searchStorage() {
 
         var savedCityBtn = document.createElement("button")
         savedCityBtn.textContent = savedCityName + ", " + savedCountryName
-        savedCityBtn.setAttribute("class", "btn btn-primary")
+        savedCityBtn.setAttribute("class", "btn btn-secondary")
         historyBtns.appendChild(savedCityBtn)
     }
 }
