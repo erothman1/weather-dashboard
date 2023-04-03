@@ -6,6 +6,7 @@ var userFormEl = document.getElementById("user-form")
 var inputEl = document.getElementById("city-name")
 var citySearchTerm = document.getElementById("city")
 var historyBtns = document.querySelector(".save-buttons")
+var historyContainer = document.getElementById("search-history-container")
 
 var tempToday = document.getElementById("temp-today")
 var windToday = document.getElementById("wind-today")
@@ -41,6 +42,15 @@ var buttonArray = []
 //Function handles form submission
 function formSubmitHandler(event) {
     event.preventDefault()
+    
+    if (event.target.matches(".btn")) {
+        console.log(event.target.textContent)
+        var buttonCityName = event.target.textContent.split(",")[0]
+        var buttonCountryName = event.target.textContent.split(",")[1]
+        getTodayCityWeather(buttonCityName, buttonCountryName)
+        getLonLat(buttonCityName, buttonCountryName)
+        return
+    }
 
     var userInputArr = []
     userInputArr.push(inputEl.value.split(","))
@@ -81,7 +91,6 @@ function formSubmitHandler(event) {
 //Function to get items from local storage and create buttons for them
 function searchStorage() {
     var savedButtonArray = JSON.parse(localStorage.getItem("buttonArray"))
-    console.log(savedButtonArray)
 
     if (!savedButtonArray) {
         savedButtonArray = []
@@ -123,23 +132,27 @@ function getTodayCityWeather(city, country) {
 }
 
 //Function to display today's weather on page
-//TODO: need to add icon representation of weather conditions
 function displayTodayWeather(city, searchTermCity, searchTermCountry) {
 
     console.log(searchTermCity + ", " + searchTermCountry + dayjs().format("M/D/YYYY"))
     citySearchTerm.textContent = searchTermCity + ", " + searchTermCountry + " " + dayjs().format("M/D/YYYY")
 
-    tempKelvin = city.main.temp
-    tempImperial = (((tempKelvin-273.15)*1.8)+32).toFixed(2)
+    var tempKelvin = city.main.temp
+    var tempImperial = (((tempKelvin-273.15)*1.8)+32).toFixed(2)
 
-    windMeterperSec = city.wind.speed
-    windImperial = (windMeterperSec*2.237).toFixed(2)
+    var windMeterperSec = city.wind.speed
+    var windImperial = (windMeterperSec*2.237).toFixed(2)
+
+    var icon = city.weather[0].icon
+    console.log(icon)
 
     tempToday.textContent = "Temp: " + tempImperial + "°F"
     windToday.textContent = "Wind: " + windImperial + " MPH"
     humidityToday.textContent = "Humidity: " + city.main.humidity + "%"
 
- 
+    var weatherIcon = document.createElement("img")
+    weatherIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png")
+    citySearchTerm.appendChild(weatherIcon)
 }
 
 //Function handles getting latitude and longitude of city
@@ -189,27 +202,51 @@ function getForecastCityWeather(city) {
 //Function to display 5-day forecast on page 
 //TODO: get dates to show up for forecast and put icons for weather conditions
 function displayForecastWeather(data) {
-    // dateOne.textContent = data.list[3].dt_text.slice(0, 11)
-    // console.log(data.list[3].dt_text.slice(0, 11))
+
+    dateOne.textContent = data.list[3].dt_txt.split(" ")[0]
     tempOne.textContent = "Temp: " + data.list[3].main.temp + "°F"
     windOne.textContent = "Wind: " + data.list[3].wind.speed + " MPH"
     humidityOne.textContent = "Humidity: " + data.list[3].main.humidity + "%"
 
+    var iconOne = document.createElement("img")
+    iconOne.setAttribute("src", "https://openweathermap.org/img/wn/" + data.list[3].weather[0].icon + "@2x.png")
+    dateOne.appendChild(iconOne)
+
+    dateTwo.textContent = data.list[11].dt_txt.split(" ")[0]
     tempTwo.textContent = "Temp: " + data.list[11].main.temp + "°F"
     windTwo.textContent = "Wind: " + data.list[11].wind.speed + " MPH"
     humidityTwo.textContent = "Humidity: " + data.list[11].main.humidity + "%"
 
+    var iconTwo = document.createElement("img")
+    iconTwo.setAttribute("src", "https://openweathermap.org/img/wn/" + data.list[11].weather[0].icon + "@2x.png")
+    dateTwo.appendChild(iconTwo)
+
+    dateThree.textContent = data.list[19].dt_txt.split(" ")[0]
     tempThree.textContent = "Temp: " + data.list[19].main.temp + "°F"
     windThree.textContent = "Wind: " + data.list[19].wind.speed + " MPH"
     humidityThree.textContent = "Humidity: " + data.list[19].main.humidity + "%"
 
+    var iconThree = document.createElement("img")
+    iconThree.setAttribute("src", "https://openweathermap.org/img/wn/" + data.list[19].weather[0].icon + "@2x.png")
+    dateThree.appendChild(iconThree)
+
+    dateFour.textContent = data.list[27].dt_txt.split(" ")[0]
     tempFour.textContent = "Temp: " + data.list[27].main.temp + "°F"
     windFour.textContent = "Wind: " + data.list[27].wind.speed + " MPH"
     humidityFour.textContent = "Humidity: " + data.list[27].main.humidity + "%"
 
+    var iconFour = document.createElement("img")
+    iconFour.setAttribute("src", "https://openweathermap.org/img/wn/" + data.list[27].weather[0].icon + "@2x.png")
+    dateFour.appendChild(iconFour)
+
+    dateFive.textContent = data.list[35].dt_txt.split(" ")[0]
     tempFive.textContent = "Temp: " + data.list[35].main.temp + "°F"
     windFive.textContent = "Wind: " + data.list[35].wind.speed + " MPH"
     humidityFive.textContent = "Humidity: " + data.list[35].main.humidity + "%"
+
+    var iconFive = document.createElement("img")
+    iconFive.setAttribute("src", "https://openweathermap.org/img/wn/" + data.list[35].weather[0].icon + "@2x.png")
+    dateFive.appendChild(iconFive)
 }
 
 //Click events
@@ -217,4 +254,4 @@ function displayForecastWeather(data) {
 userFormEl.addEventListener("submit", formSubmitHandler)
 
 //This click event isn't working 
-// historyBtns.addEventListener("click", "button", formSubmitHandler)
+historyContainer.addEventListener("click", formSubmitHandler)
