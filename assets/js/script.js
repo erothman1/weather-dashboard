@@ -5,6 +5,7 @@ countryCode = ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR',
 var userFormEl = document.getElementById("user-form")
 var inputEl = document.getElementById("city-name")
 var citySearchTerm = document.getElementById("city")
+var historyBtns = document.querySelector(".save-buttons")
 
 var tempToday = document.getElementById("temp-today")
 var windToday = document.getElementById("wind-today")
@@ -30,7 +31,7 @@ var tempFour = document.getElementById("four-temp")
 var windFour = document.getElementById("four-wind")
 var humidityFour = document.getElementById("four-humidity")
 
-var dayFive = document.getElementById("day-five")
+var dateFive = document.getElementById("day-five")
 var tempFive = document.getElementById("five-temp")
 var windFive = document.getElementById("five-wind")
 var humidityFive = document.getElementById("five-humidity")
@@ -54,10 +55,20 @@ function formSubmitHandler(event) {
             getTodayCityWeather(cityName, countryName)
             getLonLat(cityName, countryName)
             inputEl.value = ""
+
+            var savedCityBtn = document.createElement("button")
+            savedCityBtn.textContent = cityName + ", " + countryName
+            savedCityBtn.setAttribute("class", "btn btn-primary")
+            historyBtns.appendChild(savedCityBtn)
+
         } else {
             alert("Please enter a valid city name and country code")
         }
     }
+}
+
+function searchStorage() {
+    
 }
 
 //Function handles fetching weather data for today's weather
@@ -146,6 +157,7 @@ function getForecastCityWeather(city) {
 }
 
 //Function to display 5-day forecast on page 
+//TODO: get dates to show up for forecast and put icons for weather conditions
 function displayForecastWeather(data) {
     // dateOne.textContent = data.list[3].dt_text.slice(0, 11)
     // console.log(data.list[3].dt_text.slice(0, 11))
