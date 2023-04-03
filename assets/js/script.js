@@ -8,9 +8,35 @@ countryCode = ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR',
 var userFormEl = document.getElementById("user-form")
 var inputEl = document.getElementById("city-name")
 var citySearchTerm = document.getElementById("city")
+
 var tempToday = document.getElementById("temp-today")
 var windToday = document.getElementById("wind-today")
 var humidityToday = document.getElementById("humidity-today")
+
+var dateOne = document.getElementById("day-one")
+var tempOne = document.getElementById("one-temp")
+var windOne = document.getElementById("one-wind")
+var humidityOne = document.getElementById("one-humidity")
+
+var dateTwo = document.getElementById("day-two")
+var tempTwo = document.getElementById("two-temp")
+var windTwo = document.getElementById("two-wind")
+var humidityTwo = document.getElementById("two-humidity")
+
+var dateThree = document.getElementById("day-three")
+var tempThree = document.getElementById("three-temp")
+var windThree = document.getElementById("three-wind")
+var humidityThree = document.getElementById("three-humidity")
+
+var dateFour = document.getElementById("day-four")
+var tempFour = document.getElementById("four-temp")
+var windFour = document.getElementById("four-wind")
+var humidityFour = document.getElementById("four-humidity")
+
+var dayFive = document.getElementById("day-five")
+var tempFive = document.getElementById("five-temp")
+var windFive = document.getElementById("five-wind")
+var humidityFive = document.getElementById("five-humidity")
 
 //Function handles form submission
 function formSubmitHandler(event) {
@@ -37,17 +63,6 @@ function formSubmitHandler(event) {
             alert("Please enter a valid city name and country code")
         }
     }
-
-    // var cityName = inputEl.value.trim()
-
-    // if (cityName) {
-    //     getTodayCityWeather(cityName)
-    //     // getForecastCityWeather(cityName)
-    //     //create button elements for city search history
-    //     inputEl.value = ""
-    // } else {
-    //     alert("Please enter a city name")
-    // }
 }
 
 //Function handles fetching weather data for today's weather
@@ -72,7 +87,6 @@ function getTodayCityWeather(city, country) {
 }
 
 //Function to display today's weather on page
-//TODO: problem:: city name and date not showing up on page but is showing in console
 //TODO: need to add icon representation of weather conditions
 function displayTodayWeather(city, searchTermCity, searchTermCountry) {
 
@@ -117,7 +131,7 @@ function getForecastCityWeather(city) {
     var latitude = city[0].lat 
     var longitude = city[0].lon 
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey + "&units=imperial"
 
     fetch(queryURL)
         .then(function(response) {
@@ -138,7 +152,27 @@ function getForecastCityWeather(city) {
 
 //Function to display 5-day forecast on page 
 function displayForecastWeather(data) {
+    // dateOne.textContent = data.list[3].dt_text.slice(0, 11)
+    console.log(data.list[3].dt_text.slice(0, 11))
+    tempOne.textContent = "Temp: " + data.list[3].main.temp + "°F"
+    windOne.textContent = "Wind: " + data.list[3].wind.speed + " MPH"
+    humidityOne.textContent = "Humidity: " + data.list[3].main.humidity + "%"
 
+    tempTwo.textContent = "Temp: " + data.list[11].main.temp + "°F"
+    windTwo.textContent = "Wind: " + data.list[11].wind.speed + " MPH"
+    humidityTwo.textContent = "Humidity: " + data.list[11].main.humidity + "%"
+
+    tempThree.textContent = "Temp: " + data.list[19].main.temp + "°F"
+    windThree.textContent = "Wind: " + data.list[19].wind.speed + " MPH"
+    humidityThree.textContent = "Humidity: " + data.list[19].main.humidity + "%"
+
+    tempFour.textContent = "Temp: " + data.list[27].main.temp + "°F"
+    windFour.textContent = "Wind: " + data.list[27].wind.speed + " MPH"
+    humidityFour.textContent = "Humidity: " + data.list[27].main.humidity + "%"
+
+    tempFive.textContent = "Temp: " + data.list[35].main.temp + "°F"
+    windFive.textContent = "Wind: " + data.list[35].wind.speed + " MPH"
+    humidityFive.textContent = "Humidity: " + data.list[35].main.humidity + "%"
 }
 
 
