@@ -36,6 +36,8 @@ var tempFive = document.getElementById("five-temp")
 var windFive = document.getElementById("five-wind")
 var humidityFive = document.getElementById("five-humidity")
 
+var buttonArray = []
+
 //Function handles form submission
 function formSubmitHandler(event) {
     event.preventDefault()
@@ -56,6 +58,14 @@ function formSubmitHandler(event) {
             getLonLat(cityName, countryName)
             inputEl.value = ""
 
+            var buttonArray = JSON.parse(localStorage.getItem("buttonArray"))
+            if (!buttonArray) {
+                buttonArray = []
+            } 
+            buttonArray.push({cityName, countryName})
+            localStorage.setItem("buttonArray", JSON.stringify(buttonArray))
+            
+
             var savedCityBtn = document.createElement("button")
             savedCityBtn.textContent = cityName + ", " + countryName
             savedCityBtn.setAttribute("class", "btn btn-primary")
@@ -65,11 +75,31 @@ function formSubmitHandler(event) {
             alert("Please enter a valid city name and country code")
         }
     }
+    console.log(buttonArray)
 }
 
+//Function to get items from local storage and create buttons for them
 function searchStorage() {
+    var savedButtonArray = JSON.parse(localStorage.getItem("buttonArray"))
+    console.log(savedButtonArray)
 
+    if (!savedButtonArray) {
+        savedButtonArray = []
+    } 
+
+    for (var i = 0; i < savedButtonArray.length; i++) {
+
+        var savedCityName = savedButtonArray[i].cityName
+        var savedCountryName = savedButtonArray[i].countryName
+
+        var savedCityBtn = document.createElement("button")
+        savedCityBtn.textContent = savedCityName + ", " + savedCountryName
+        savedCityBtn.setAttribute("class", "btn btn-primary")
+        historyBtns.appendChild(savedCityBtn)
+    }
 }
+
+searchStorage()
 
 //Function handles fetching weather data for today's weather
 function getTodayCityWeather(city, country) {
@@ -187,4 +217,4 @@ function displayForecastWeather(data) {
 userFormEl.addEventListener("submit", formSubmitHandler)
 
 //This click event isn't working 
-historyBtns.addEventListener("click", "button", formSubmitHandler)
+// historyBtns.addEventListener("click", "button", formSubmitHandler)
