@@ -1,5 +1,6 @@
-.card {
-
+.forecast-card {
+    background-color:rgb(82, 100, 189);
+    color: white;
 }
 
 header {

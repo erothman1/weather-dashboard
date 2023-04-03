@@ -134,8 +134,8 @@ function getTodayCityWeather(city, country) {
 //Function to display today's weather on page
 function displayTodayWeather(city, searchTermCity, searchTermCountry) {
 
-    console.log(searchTermCity + ", " + searchTermCountry + dayjs().format("M/D/YYYY"))
-    citySearchTerm.textContent = searchTermCity + ", " + searchTermCountry + " " + dayjs().format("M/D/YYYY")
+    console.log(searchTermCity + ", " + searchTermCountry + dayjs().format("YYYY-MM-DD"))
+    citySearchTerm.textContent = searchTermCity + ", " + searchTermCountry + " " + dayjs().format("YYYY-MM-DD")
 
     var tempKelvin = city.main.temp
     var tempImperial = (((tempKelvin-273.15)*1.8)+32).toFixed(2)
