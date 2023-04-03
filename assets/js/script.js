@@ -68,7 +68,7 @@ function formSubmitHandler(event) {
 }
 
 function searchStorage() {
-    
+
 }
 
 //Function handles fetching weather data for today's weather
@@ -185,3 +185,6 @@ function displayForecastWeather(data) {
 //Click events
 //TODO: need click event for buttons for each search history 
 userFormEl.addEventListener("submit", formSubmitHandler)
+
+//This click event isn't working 
+historyBtns.addEventListener("click", "button", formSubmitHandler)
