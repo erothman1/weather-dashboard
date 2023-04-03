@@ -7,7 +7,7 @@ countryCode = ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR',
 
 var userFormEl = document.getElementById("user-form")
 var inputEl = document.getElementById("city-name")
-var citySearchTerm = document.getElementById("city-name")
+var citySearchTerm = document.getElementById("city")
 var tempToday = document.getElementById("temp-today")
 var windToday = document.getElementById("wind-today")
 var humidityToday = document.getElementById("humidity-today")
@@ -60,7 +60,7 @@ function getTodayCityWeather(city, country) {
                 response.json().then(function(data) {
                     displayTodayWeather(data, city, country)
                     // console.log(response)
-                    // console.log(data)
+                    console.log(data)
                 })
             } else {
                 alert("Error " + response.statusText)
@@ -100,9 +100,7 @@ function getLonLat(city, country) {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    // getForecastCityWeather(data, city, country)
-                    console.log(data)
-                    console.log(response)
+                    getForecastCityWeather(data)
                 })
             } else {
                 alert("Error" + response.statusText)
@@ -115,37 +113,31 @@ function getLonLat(city, country) {
 }
 
 //Function handles fetching five-day forecast weather data 
-function getForecastCityWeather(city, citySearchTerm, countrySearchTerm) {
-    var latitude = city.lat 
-    var longitude = city.lon 
-    var citySearch = citySearchTerm
-    var country = countrySearchTerm
+function getForecastCityWeather(city) {
+    var latitude = city[0].lat 
+    var longitude = city[0].lon 
 
-    console.log(latitude)
-    console.log(longitude)
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey
 
-    var queryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey
-
-    // fetch(queryURL)
-    //     .then(function(response) {
-    //         if (response.ok) {
-    //             response.json().then(function(data) {
-    //                 // displayForecastWeather()
-    //                 console.log(data)
-    //             })
-    //         } else {
-    //             alert("Error" + response.statusText)
-    //         }
-    //     })
-    //     .catch(function(error) {
-    //         alert("Unable to connect to Weather API")
-    //     })
-
+    fetch(queryURL)
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    displayForecastWeather(data)
+                    console.log(data)
+                })
+            } else {
+                alert("Error" + response.statusText)
+            }
+        })
+        .catch(function(error) {
+            alert("Unable to connect to Weather API")
+        })
 
 }
 
 //Function to display 5-day forecast on page 
-function displayForecastWeather(data, city, country) {
+function displayForecastWeather(data) {
 
 }
 
