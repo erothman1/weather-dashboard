@@ -6,6 +6,8 @@ I created this project in order to see the current and future weather outlook of
 
 ## Usage
 
+To use this application, type in a city comma country-code such as "Austin, US" or "New York, US". Once the that is typed in, press search and the current weather and five-day forecast will come up! You're search history will come up as buttons that you can click as well.
+
 [This is the link to the completed application](https://erothman1.github.io/weather-dashboard/)
 
 This is a screenshot to the completed application:
